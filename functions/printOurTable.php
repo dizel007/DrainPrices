@@ -30,9 +30,12 @@ if (isset($arr_name)) {
 
   // Заполняем саму таблциу
         for ($i=0; $i<count($arr_name); $i++){
-
-      echo "<tr class =\"\">
-            <td class=\"\">".$arr_name[$i]['id']."</td>
+// foreach ($arr_name as $i => $value) {
+//        foreach ($value as $key => $value1) {
+//          # code...
+//        }
+           echo "<tr class =\"\">
+            <td class=\"\">".($i+1)."</td>
             <td>".$arr_name[$i]['maker'] ."</td> 
             <td>".$arr_name[$i]['article']."</td>
             <td class=\"limit_width \">".$arr_name[$i]['name']."</td>

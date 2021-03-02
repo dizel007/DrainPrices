@@ -1,6 +1,6 @@
 <?php 
 
-$arr_for_upper_form = selectAllArr($mysqli);
+$arr_for_upper_form = selectForCap($mysqli);
 
 $i = "";
 foreach ($arr_for_upper_form  as $arr) {
@@ -23,6 +23,18 @@ asort($arr_hload_class);
 // var_dump($arr_new_width);
 echo "<form>
     <div  class =\"up_form\">
+
+    <div class=\"mobile_web\">
+    <select size=\"1\" name=\"maker\">
+        <option selected value=\"0\">Производитель</option>
+        <option value=\"1\">Gidrolica</option>
+        <option value=\"2\">StandartPark</option>
+        <option value=\"3\">MK ZHBI</option>
+        <option value=\"4\">Aquastok</option>
+    </select>
+    </div>
+
+
           <div class=\"mobile_web\">
             <select size=\"1\" name=\"typeProduct\">
                 <option selected value=\"0\">Выберите тип товара</option>
@@ -47,7 +59,7 @@ echo "<form>
                 <option selected value=\"0\">Выберите DN</option>
                 <option value=\"9\">DN90</option>
                 <option value=\"1\">DN100</option>
-                <option value=\"11\">DN100</option>
+                <option value=\"11\">DN110</option>
                 <option value=\"15\">DN150</option>
                 <option value=\"16\">DN160</option>
                 <option value=\"2\">DN200</option>
@@ -79,7 +91,7 @@ echo "<form>
       </div>
      
               <div class=\"mobile_web\">
-              <select size=\"1\" name=\"clNagr\">
+              <select size=\"1\" name=\"load_class\">
                   <option selected value=\"0\">Выберите класс нагрузки</option>
                   <option value=\"1\">A15</option>
                   <option value=\"2\">B125</option>
@@ -99,16 +111,16 @@ echo "<form>
 </form>";
 
 
-// <form action="" method="get" id="foobar">
-//     <select name="year" onchange="document.getElementById('foobar').submit()">
+
+
+// echo "
+// <form action=\"?.width=".$width."\" method=\"get\" id=\"foobar\">
+//     <select name=\"year\" onchange=\"document.getElementById('foobar').submit()\">
 //         <option></option>
 //         <option>2010</option>
 //         <option>2011</option>
 //     </select>
-//   </form>
-
-
-
+//   </form>";
 
 unset($arr_maker);
 unset($arr_width);

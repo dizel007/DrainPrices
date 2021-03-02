@@ -1,6 +1,6 @@
 <?php 
 
-$arr_for_upper_form = selectAllArr($mysqli);
+$arr_for_upper_form = selectForCap($mysqli);
 
 $i = "";
 foreach ($arr_for_upper_form  as $arr) {
