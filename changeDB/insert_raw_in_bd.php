@@ -10,7 +10,7 @@ if ($handle) {
     while (($buffer = fgets($handle)) !== false) {
 
       $buffer = substr($buffer, 0, -3);
-$sql = "INSERT INTO `line_drain_lotki` (`id`, `maker`, `article`, `name`, `DN`, `length`, `width`, `height`, `load_class`, `weight`, `price`, `discount`, `date_write`, `option_article`, `rezerv1`, `rezerv2`) VALUES $buffer";
+$sql = "INSERT INTO `line_drain_lotki` (`id`, `maker`, `article`, `name`, `DN`, `length`, `width`, `height`, `load_class`, `weight`, `price`, `discount`, `date_write`, `option_article`, `typeProduct`, `material` , `uklon`) VALUES $buffer";
 
 echo "XXX=".$buffer."==XXX<br><br>";
 

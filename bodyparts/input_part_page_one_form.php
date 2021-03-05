@@ -46,6 +46,10 @@ echo "<form>
             </div>
 
             <div class=\"mobile_web\">
+                    <input type=\"checkbox\" name=\"uklon\" value=\"1\">Уклон
+            </div>
+
+            <div class=\"mobile_web\">
               <select size=\"1\" name=\"material\">
                   <option selected value=\"0\">Выберите материал</option>
                   <option value=\"1\">Пластик</option>
