@@ -16,13 +16,15 @@ function printOurTable($arr_name) {
           <td class=\"hidden_class_column\">Кл.Нагр</td>
       <td class=\"hidden_class_column\">Вес</td>
           <td  class=\"hidden_class_column\">Цена розн.</td>
-      <td>Размер скидки</td>
-      <td>Дата создания</td>
+      <td>Цена дилер</td>
+      <td>Дата обновл</td>
       <td>Доп. артикулы</td>
       <td>Тип Продукта</td>
       <td>Материал</td>
  
       </tr>";
+
+      
       $realDate = date("m.d.y");
       $realDate=strtotime($realDate);
       $tempDate = "";
