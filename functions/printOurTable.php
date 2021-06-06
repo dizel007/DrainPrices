@@ -1,4 +1,5 @@
 <?php
+require_once("real_names.php");
 
 function printOurTable($arr_name) {
       echo "<div class =\"our_table\"> <table class=\"drawtable\">";
@@ -10,7 +11,6 @@ function printOurTable($arr_name) {
       <td class=\"hidden_class_column\">Наименование</td>
       <td>Гидр.сечение</td>
       <td class=\"hidden_class_column\">Длина</td>
-      
       <td class=\"hidden_class_column\">Ширина</td>
       <td class=\"hidden_class_column\">Высота</td>
           <td class=\"hidden_class_column\">Кл.Нагр</td>
@@ -32,13 +32,14 @@ if (isset($arr_name)) {
 
   // Заполняем саму таблциу
         for ($i=0; $i<count($arr_name); $i++){
-// foreach ($arr_name as $i => $value) {
-//        foreach ($value as $key => $value1) {
-//          # code...
-//        }
+
+          $maker_temp = makerName($arr_name[$i]['maker']);
+          $material_temp = materialName($arr_name[$i]['material']);
+          $typeProduct_temp = typeProductName($arr_name[$i]['typeProduct']);
+
            echo "<tr class =\"\">
             <td class=\"\">".($i+1)."</td>
-            <td>".$arr_name[$i]['maker'] ."</td> 
+            <td>".$maker_temp."</td> 
             <td>".$arr_name[$i]['article']."</td>
             <td class=\"limit_width \">".$arr_name[$i]['name']."</td>
             <td>".$arr_name[$i]['DN']."</td>
@@ -51,13 +52,12 @@ if (isset($arr_name)) {
             <td class =\"\">".$arr_name[$i]['discount']."</td>
             <td>".$arr_name[$i]['date_write']."</td>
             <td>".$arr_name[$i]['option_article']."</td>
-            <td>".$arr_name[$i]['typeProduct']."</td>
-            <td>".$arr_name[$i]['material']."</td>
+            <td>".$typeProduct_temp."</td>
+            <td>".$material_temp."</td>
             
           </tr>";
         }
-
-      // echo "<br>";
+    
     }
     echo "</table></div>";
 

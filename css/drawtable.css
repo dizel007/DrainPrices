@@ -2,7 +2,7 @@
 /* display: block; */
 display: flex;
 width: 100%;
-background-color: rgb(176, 240, 210);
+background-color: rgb(172, 159, 219);
 min-height: 30px;
 margin: 0;
 
@@ -19,7 +19,7 @@ margin: 0;
   }
 
  .drawtable td{
- background-color: rgb(228, 242, 247);
+ background-color: rgb(229, 206, 236);
  border:  0.5px solid ;
  word-wrap : break-word;
  text-align: center;
