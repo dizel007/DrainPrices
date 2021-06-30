@@ -1,4 +1,7 @@
 <?php 
+require_once("functions/select_params.php");
+
+
 
 if (!empty($_GET['maker']))       {  $maker = $_GET['maker'];  }
 if (!empty($_GET['typeProduct'])) {  $typeProduct = $_GET['typeProduct'];  }
@@ -29,7 +32,7 @@ $get_param=0; // количество передаваемых параметр�
 // echo "uklon=". $uklon."<br>";
 
 
-// Создаем массив по всем параметрам, есои не выбран ни один параметр, то выводим все таблицу
+// Создаем массив по всем параметрам, есЛи не выбран ни один параметр, то выводим все таблицу
 $get_param>0 ? $arr_for_upper_form = selectForCapWhereAll($mysqli, $maker, $typeProduct, $material,$dn , $width , $height , $load_class):$arr_for_upper_form=selectAllArr($mysqli);
 $i = "";
 foreach ($arr_for_upper_form as $arr) {
@@ -69,18 +72,15 @@ echo <<<HTML
     <select size="1" name="maker">
 HTML;
 
-switch ($maker) {
-    case 0: {$maker_temp = "Производитель"; break;}
-    case 1: {$maker_temp = "Gidrolica"; break;}
-    case 2: {$maker_temp = "StandartPark"; break;}
-    case 3: {$maker_temp = "MK ZHBI"; break;}
-    case 4: {$maker_temp = "Aquastok"; break;}
-    break;
-}
+
+
+$maker_temp = selectMakerFromPerem($maker); // функция выбора производителя товара
+
 echo  " <option selected value=".$maker.">".$maker_temp."</option>";
   foreach ($arr_maker  as $arr_m) 
-    {
-        echo "<option maker=".$arr_m.">".$arr_m."</option>";
+    { 
+        $arr_m_temp = selectMakerFromPerem($arr_m); // функция выбора производителя товара
+        echo "<option value=".$arr_m.">".$arr_m_temp."</option>";
     }
    echo "</select> 
          </div>";
@@ -91,29 +91,20 @@ echo <<<HTML
          <select size="1" name="typeProduct">
 HTML;
 
-
-switch ($typeProduct) {
-    case 0: {$typeProduct_temp = "Тип продукции"; break;}
-    case 1: {$typeProduct_temp = "Лоток"; break;}
-    case 2: {$typeProduct_temp = "Пескоуловитель"; break;}
-    case 3: {$typeProduct_temp = "Решетка"; break;}
-    break;
-}
-
-
-
-
-echo  " <option disabled >Тип продукции</option>";
+$typeProduct_temp = selectTypeProductFromPerem($typeProduct); // функция выбираем название продукта из списка
+// echo  " <option disabled >Тип продукции</option>";
     echo "<option selected value=".$typeProduct.">".$typeProduct_temp."</option>";
   foreach ($arr_typeProduct  as $arr_t) 
-    {
-        echo "<option maker=".$arr_t.">".$arr_t."</option>";
-    }
+            {
+                $typeProduct_temp = selectTypeProductFromPerem($arr_t);// функция выбираем название продукта из списка
+                echo "<option value=".$arr_t.">".$typeProduct_temp."</option>";
+            }
     echo <<<HTML
-     </select>
-     
-   </div>
-               <!-- ТИП ПРОДУКТА КОНЕЦ  ********************************************************************   -->
+    </select>
+  </div>
+  
+<!-- ТИП ПРОДУКТА КОНЕЦ  ********************************************************************   -->
+
 <!--           UKLON          -->
             <div class="mobile_web">
                     <input type="checkbox" name="uklon" value="1">Уклон
@@ -129,11 +120,14 @@ echo <<<HTML
             <div class="mobile_web">
             <select size ="1" name="dn">
 HTML;
-echo  " <option disabled >Гидр.сечение</option>";
-echo  " <option selected value=\"".$dn."\">".$dn."</option>";
+// echo  " <option disabled >Гидр.сечение</option>";
+
+$dn_temp = selectDnFromPerem($dn);
+echo  " <option selected value=\"".$dn."\">".$dn_temp."</option>";
                     foreach ($arr_dn as $arr_x) 
                       {
-                          echo "<option dn=".$arr_x.">".$arr_x."</option>";
+                        $dn_temp = selectDnFromPerem($dn);  
+                        echo "<option value=".$arr_x.">".$dn_temp."</option>";
                       }
 echo <<<HTML
        </select>
@@ -143,25 +137,20 @@ HTML;
 
 //  ТИП МАТЕРИАЛА ****************************************************************
 
-switch ($material) {
-    case 0: {$material_temp = "Материал"; break;}
-    case 1: {$material_temp = "Пластик"; break;}
-    case 2: {$material_temp = "Бетон"; break;}
-    case 3: {$material_temp = "Полимербетон"; break;}
-    case 4: {$material_temp = "Сталь"; break;}
-    case 5: {$material_temp = "чугун"; break;}
-    break;
-}
 
 echo <<<HTML
             <div class="mobile_web">
             <select size ="1" name="material">
 HTML;
-echo  " <option disabled >Материал</option>";
+// echo  " <option disabled >Материал</option>";
+
+$material_temp = selectMaterialFromPerem($material);
+
 echo  " <option selected value=\"".$material."\">".$material_temp."</option>";
                     foreach ($arr_material as $arr_x) 
                       {
-                          echo "<option material=".$arr_x.">".$arr_x."</option>";
+                        $material_temp = selectMaterialFromPerem($arr_x);
+                          echo "<option value=".$arr_x.">".$material_temp."</option>";
                       }
 echo <<<HTML
        </select>
@@ -169,14 +158,16 @@ echo <<<HTML
 HTML;
 
 
-
 //     ШИРИНА   ********************************************************************    
 echo <<<HTML
          <div class="mobile_web">
             <select size ="1" name="width">
 HTML;
-echo  " <option disabled >Ширина</option>";
-        echo  " <option selected value=\"".$width."\">".$width."</option>";
+
+if ($width == "")  {echo  " <option value= \"\">Ширина</option>";}
+ else {
+    echo  " <option selected value=\"".$width."\">".$width."</option>";     
+    }
                     foreach ($arr_width  as $arr_w) 
                       {
                           echo "<option width=".$arr_w.">".$arr_w."</option>";
@@ -192,8 +183,15 @@ echo <<<HTML
             <div class="mobile_web">
             <select size ="1" name="height">
 HTML;
-echo  " <option disabled >Высота</option>";
-echo  " <option selected value=\"".$height."\">".$height."</option>";
+
+
+if ($height == "")  {echo  " <option value= \"\">Высота</option>";}
+ else {
+    echo  " <option selected value=\"".$height."\">".$height."</option>";     
+    }
+
+//  echo  " <option value= \"\" >Высота</option>";
+// echo  " <option selected value=\"".$height."\">".$height."</option>";
                     foreach ($arr_height as $arr_h) 
                       {
                           echo "<option height=".$arr_h.">".$arr_h."</option>";

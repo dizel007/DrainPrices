@@ -1,5 +1,6 @@
 <?php
 // $mysqli->query("SET NAMES 'utf8'");
+// ФУНКИЯ ВЫБОРА параметров для запроса в БД, Сделано по ебнуому, чтобы можно было выбирать в любом порядке параметры
 function selectForCapWhereAll($mysqli, $maker, $typeProduct, $material, $dn , $width , $height , $load_class) {
  $temp=0; 
 $col=0; // вводим переменную, чтобы понять сколько параметров выбрано
@@ -30,21 +31,21 @@ if ($col == 1) { // условие если нет первого парамет
   } else {
     empty($dn)?$sql_dn="":$sql_dn=" `dn`=$dn";
   }
-  empty($material)?$temp=0:$col=1; // 
+  empty($dn)?$temp=0:$col=1; // 
 
 if ($col == 1) { // условие если нет первого параметра
     empty($width)?$sql_width="":$sql_width=" AND `width`=$width";
   } else {
     empty($width)?$sql_width="":$sql_width=" `width`=$width";
   }
-  empty($material)?$temp=0:$col=1; // 
+  empty($width)?$temp=0:$col=1; // 
 
 if ($col == 1) { // условие если нет первого параметра
   empty($height)?$sql_height="":$sql_height=" AND `height`=$height";
   } else {
     empty($height)?$sql_height="":$sql_height=" `height`=$height";
   }
-  empty($material)?$temp=0:$col=1; // 
+  empty($height)?$temp=0:$col=1; // 
 
 if ($col == 1) { // условие если нет первого параметра
 
@@ -52,11 +53,12 @@ if ($col == 1) { // условие если нет первого парамет
   } else {
     empty($load_class)?$sql_load_class="":$sql_load_class=" `load_class`=$load_class";
   }
-  empty($material)?$temp=0:$col=1; // 
+  empty($load_class)?$temp=0:$col=1; // 
 
 
     $sql = "SELECT * FROM `line_drain_lotki` WHERE  $sql_maker $sql_typeProduct $sql_material $sql_dn $sql_width $sql_height $sql_load_class";
-echo "===".$sql."===<br>";
+echo "==={".$sql."}===<br>";
+// echo "COL=".$col;
   $fQuery = $mysqli->query($sql);
 //$arr_name = [];
 
