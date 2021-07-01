@@ -6,14 +6,14 @@ require_once ("../functions/makeArrFromObj.php");
 
 // mb_internal_encoding("UTF-8");  // не работает
 echo "НАЧАТ ВВОД ДАННЫХ ......... <br>";
-$handle = fopen ("../GidrolicaPrice___.txt", "r");
+$handle = fopen ("../_mkzhbi_price_.txt", "r");
 $array = null;
 $zzz = 0;
 if ($handle) {
 
    while (($buffer = fgets($handle)) !== false) {
       if ($zzz == 0)  { 
-        $buffer = substr($buffer, 3, -3); // Костыль чтобы вводить UTF-8 
+         $buffer = substr($buffer, 0, -3);  //substr($buffer, 3, -3); // Костыль чтобы вводить UTF-8 
         $zzz++;
         }
         else {
@@ -47,8 +47,8 @@ if (($tempArr[0]['article'] == $article) and ($tempArr[0]['maker'] == $maker)) {
    $discount_new = $arr[11];
 // Если цена или скидка изменилась , то записываем новую цену и скидку . Также обновляем дату записи
    if (($price_new != $price_old ) or ($discount_new != $discount_old)) {
-       
-          $sql = "UPDATE `line_drain_lotki` SET `price` = $price_new, `discount` = $discount_new, `date_write` = CURDATE() WHERE `article` = $article";
+          $article_t = "'".$article."'";
+          $sql = "UPDATE `line_drain_lotki` SET `price` = $price_new, `discount` = $discount_new, `date_write` = CURDATE() WHERE `article` = $article_t";
           echo "ZZZ==  ".$sql." ==ZZZ<br><br>";
 
           $query = $mysqli->query($sql);

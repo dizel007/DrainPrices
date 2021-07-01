@@ -36,13 +36,14 @@ if (isset($arr_name)) {
           $maker_temp = makerName($arr_name[$i]['maker']);
           $material_temp = materialName($arr_name[$i]['material']);
           $typeProduct_temp = typeProductName($arr_name[$i]['typeProduct']);
+          $dnName = dnName($arr_name[$i]['DN']);
 
            echo "<tr class =\"\">
             <td class=\"\">".($i+1)."</td>
             <td>".$maker_temp."</td> 
             <td>".$arr_name[$i]['article']."</td>
             <td class=\"limit_width \">".$arr_name[$i]['name']."</td>
-            <td>".$arr_name[$i]['DN']."</td>
+            <td>".$dnName."</td>
             <td class=\"\">".$arr_name[$i]['length']."</td>  
             <td class=\"\">".$arr_name[$i]['width']."</td>
             <td class=\"\">".$arr_name[$i]['height']."</td>

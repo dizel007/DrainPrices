@@ -18,9 +18,12 @@ function selectTypeProductFromPerem($typeProduct) {
     case 1: {$typeRoductName = "Лоток"; break;}
     case 2: {$typeRoductName = "Пескоуловитель"; break;}
     case 3: {$typeRoductName = "Решетка"; break;}
-    case 6: {$typeRoductName = "Торцевая заглушка"; break;}
-    case 7: {$typeRoductName = "Переходник"; break;}
-    case 8: {$typeRoductName = "Корзина"; break;}
+    case 4: {$typeRoductName = "Крепеж"; break;}
+    case 5: {$typeRoductName = "Дождеприемник"; break;}
+    case 6: {$typeRoductName = "люк"; break;}
+    case 7: {$typeRoductName = "Торцевая заглушка"; break;}
+    case 8: {$typeRoductName = "Переходник"; break;}
+    case 9: {$typeRoductName = "Корзина"; break;}
     
      
     break;
@@ -51,9 +54,11 @@ function selectMaterialFromPerem($material) {
         case 0: {$materialName = "Материал"; break;}
         case 1: {$materialName = "Пластик"; break;}
         case 2: {$materialName = "Бетон"; break;}
-        case 3: {$materialName = "Полимербетон"; break;}
+        case 3: {$materialName = "Полимерпесок"; break;}
         case 4: {$materialName = "Сталь"; break;}
         case 5: {$materialName = "чугун"; break;}
+        case 6: {$materialName = "композитбетон"; break;}
+        case 7: {$materialName = "Полимербетон"; break;}
         break;
     }
 

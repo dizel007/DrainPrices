@@ -1,7 +1,7 @@
 <?php
 // $mysqli->query("SET NAMES 'utf8'");
 // ФУНКИЯ ВЫБОРА параметров для запроса в БД, Сделано по ебнуому, чтобы можно было выбирать в любом порядке параметры
-function selectForCapWhereAll($mysqli, $maker, $typeProduct, $material, $dn , $width , $height , $load_class) {
+function selectForCapWhereAll($mysqli, $maker, $typeProduct, $material, $dn , $width , $height , $load_class, $uklon) {
  $temp=0; 
 $col=0; // вводим переменную, чтобы понять сколько параметров выбрано
 if ($maker=="") {
@@ -55,8 +55,14 @@ if ($col == 1) { // условие если нет первого парамет
   }
   empty($load_class)?$temp=0:$col=1; // 
 
+  
+  empty($uklon)?$sql_uklon=0:$sql_uklon=1;
+        
+    
+  
 
-    $sql = "SELECT * FROM `line_drain_lotki` WHERE  $sql_maker $sql_typeProduct $sql_material $sql_dn $sql_width $sql_height $sql_load_class";
+
+    $sql = "SELECT * FROM `line_drain_lotki` WHERE  $sql_maker $sql_typeProduct $sql_material $sql_dn $sql_width $sql_height $sql_load_class AND `uklon`=$sql_uklon";
 echo "==={".$sql."}===<br>";
 // echo "COL=".$col;
   $fQuery = $mysqli->query($sql);
@@ -76,7 +82,7 @@ return $arr_name;
 
 // Из объекиа данных считанных из БД мы формируем для работы массив с этими данными (выводим весь объем данных)
 function selectAllArr($mysqli) {
-           $sql = "SELECT DISTINCT  * FROM `line_drain_lotki`
+           $sql = "SELECT DISTINCT  * FROM `line_drain_lotki` WHERE `uklon` = 0
           --  LEFT JOIN `materials` ON line_drain_lotki.`material` = materials.`number`
           --  LEFT JOIN `typeProduct` ON line_drain_lotki.`typeProduct` = typeProduct.`number`
            ORDER BY line_drain_lotki.`id` ASC";

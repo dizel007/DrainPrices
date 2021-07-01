@@ -10,7 +10,7 @@ if (!empty($_GET['dn']))          {  $dn = $_GET['dn'];  }
 if (!empty($_GET['width']))       {  $width = $_GET['width'];  }
 if (!empty($_GET['height']))      {  $height = $_GET['height'];  }
 if (!empty($_GET['load_class']))  {  $load_class  = $_GET['load_class'];  }
-
+if (!empty($_GET['uklon']))       {  $uklon  = $_GET['uklon'];  }
 
 $get_param=0; // количество передаваемых параметров в ГЕТ запросе
 !isset($maker)?$maker = "": $get_param++ ;
@@ -21,6 +21,8 @@ $get_param=0; // количество передаваемых параметр�
 !isset($height)?  $height = "" : $get_param++ ;
 !isset($load_class)? $load_class = "": $get_param++ ;
 !isset($uklon)? $uklon = "": $get_param++ ;
+
+
 
 // echo "maker=". $maker."<br>";
 // echo "typeProduct=". $typeProduct."<br>";
@@ -33,7 +35,7 @@ $get_param=0; // количество передаваемых параметр�
 
 
 // Создаем массив по всем параметрам, есЛи не выбран ни один параметр, то выводим все таблицу
-$get_param>0 ? $arr_for_upper_form = selectForCapWhereAll($mysqli, $maker, $typeProduct, $material,$dn , $width , $height , $load_class):$arr_for_upper_form=selectAllArr($mysqli);
+$get_param>0 ? $arr_for_upper_form = selectForCapWhereAll($mysqli, $maker, $typeProduct, $material,$dn , $width , $height , $load_class, $uklon):$arr_for_upper_form=selectAllArr($mysqli);
 $i = "";
 foreach ($arr_for_upper_form as $arr) {
     $arr_maker[$i] = $arr['maker'];
@@ -53,6 +55,12 @@ $arr_dn = array_unique($arr_dn);
 $arr_width = array_unique($arr_width);
 $arr_height = array_unique($arr_height);
 $arr_hload_class = array_unique($arr_hload_class);
+
+
+// echo "<pre>";
+// var_dump ($arr_dn);
+// echo "<pre>";
+
 
 asort($arr_maker);
 asort($arr_typeProduct);
@@ -113,7 +121,7 @@ HTML;
 
 
 
-//  ГИДРАВЛИЧЕСКОЕ СЕЧЕНГИЕ ****************************************************************
+//  ГИДРАВЛИЧЕСКОЕ СЕЧЕНИЕ ****************************************************************
 
 
 echo <<<HTML
@@ -122,11 +130,11 @@ echo <<<HTML
 HTML;
 // echo  " <option disabled >Гидр.сечение</option>";
 
-$dn_temp = selectDnFromPerem($dn);
+$dn_temp = dnName($dn);
 echo  " <option selected value=\"".$dn."\">".$dn_temp."</option>";
                     foreach ($arr_dn as $arr_x) 
                       {
-                        $dn_temp = selectDnFromPerem($dn);  
+                        $dn_temp = dnName($arr_x);  
                         echo "<option value=".$arr_x.">".$dn_temp."</option>";
                       }
 echo <<<HTML
