@@ -85,6 +85,8 @@ HTML;
 $maker_temp = selectMakerFromPerem($maker); // функция выбора производителя товара
 
 echo  " <option selected value=".$maker.">".$maker_temp."</option>";
+echo  " <option value=\"\">сброс</option>";
+
   foreach ($arr_maker  as $arr_m) 
     { 
         $arr_m_temp = selectMakerFromPerem($arr_m); // функция выбора производителя товара
@@ -102,6 +104,8 @@ HTML;
 $typeProduct_temp = selectTypeProductFromPerem($typeProduct); // функция выбираем название продукта из списка
 // echo  " <option disabled >Тип продукции</option>";
     echo "<option selected value=".$typeProduct.">".$typeProduct_temp."</option>";
+    echo  " <option value=\"\">сброс</option>";
+
   foreach ($arr_typeProduct  as $arr_t) 
             {
                 $typeProduct_temp = selectTypeProductFromPerem($arr_t);// функция выбираем название продукта из списка
@@ -110,14 +114,19 @@ $typeProduct_temp = selectTypeProductFromPerem($typeProduct); // функция 
     echo <<<HTML
     </select>
   </div>
-  
-<!-- ТИП ПРОДУКТА КОНЕЦ  ********************************************************************   -->
+HTML;  
+//ТИП ПРОДУКТА КОНЕЦ  ********************************************************************   -->
 
-<!--           UKLON          -->
-            <div class="mobile_web">
-                    <input type="checkbox" name="uklon" value="1">Уклон
-            </div> 
-HTML;
+//           UKLON          -->
+$uklon_temp = "";
+if ($uklon == 1) {
+  $uklon_temp = "checked" ;
+}
+
+  echo "<div class=\"mobile_web\">";
+  echo      "<input type=\"checkbox\" name=\"uklon\" value=\"1\" ".$uklon_temp.">Уклон
+            </div> ";
+
 
 
 
@@ -132,6 +141,9 @@ HTML;
 
 $dn_temp = dnName($dn);
 echo  " <option selected value=\"".$dn."\">".$dn_temp."</option>";
+
+echo  " <option value=\"\">сброс</option>";
+
                     foreach ($arr_dn as $arr_x) 
                       {
                         $dn_temp = dnName($arr_x);  
@@ -155,6 +167,9 @@ HTML;
 $material_temp = selectMaterialFromPerem($material);
 
 echo  " <option selected value=\"".$material."\">".$material_temp."</option>";
+
+echo  " <option value=\"\">сброс</option>";
+
                     foreach ($arr_material as $arr_x) 
                       {
                         $material_temp = selectMaterialFromPerem($arr_x);
@@ -176,6 +191,7 @@ if ($width == "")  {echo  " <option value= \"\">Ширина</option>";}
  else {
     echo  " <option selected value=\"".$width."\">".$width."</option>";     
     }
+    echo  " <option value=\"\">сброс</option>";
                     foreach ($arr_width  as $arr_w) 
                       {
                           echo "<option width=".$arr_w.">".$arr_w."</option>";
@@ -197,9 +213,7 @@ if ($height == "")  {echo  " <option value= \"\">Высота</option>";}
  else {
     echo  " <option selected value=\"".$height."\">".$height."</option>";     
     }
-
-//  echo  " <option value= \"\" >Высота</option>";
-// echo  " <option selected value=\"".$height."\">".$height."</option>";
+    echo  " <option value=\"\">сброс</option>";
                     foreach ($arr_height as $arr_h) 
                       {
                           echo "<option height=".$arr_h.">".$arr_h."</option>";

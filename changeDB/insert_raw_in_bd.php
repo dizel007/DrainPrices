@@ -6,7 +6,7 @@ require_once ("../functions/makeArrFromObj.php");
 
 // mb_internal_encoding("UTF-8");  // не работает
 echo "НАЧАТ ВВОД ДАННЫХ ......... <br>";
-$handle = fopen ("../_mkzhbi_price_.txt", "r");
+$handle = fopen ("../_standartPark_beton_.txt", "r");
 $array = null;
 $zzz = 0;
 if ($handle) {

@@ -4,9 +4,9 @@
 function selectForCapWhereAll($mysqli, $maker, $typeProduct, $material, $dn , $width , $height , $load_class, $uklon) {
  $temp=0; 
 $col=0; // вводим переменную, чтобы понять сколько параметров выбрано
+
 if ($maker=="") {
-  
-        $sql_maker="";
+     $sql_maker="";
     } else {
       $sql_maker="`maker`=$maker"; 
       $col=1;
@@ -34,36 +34,50 @@ if ($col == 1) { // условие если нет первого парамет
   empty($dn)?$temp=0:$col=1; // 
 
 if ($col == 1) { // условие если нет первого параметра
-    empty($width)?$sql_width="":$sql_width=" AND `width`=$width";
+    empty($width)?$sql_width="":$sql_width=" AND `width`='".$width."'";
   } else {
-    empty($width)?$sql_width="":$sql_width=" `width`=$width";
+    empty($width)?$sql_width="":$sql_width=" `width`='".$width."'";
   }
   empty($width)?$temp=0:$col=1; // 
 
 if ($col == 1) { // условие если нет первого параметра
-  empty($height)?$sql_height="":$sql_height=" AND `height`=$height";
+  empty($height)?$sql_height="":$sql_height=" AND `height`='".$height."'";
   } else {
-    empty($height)?$sql_height="":$sql_height=" `height`=$height";
+    empty($height)?$sql_height="":$sql_height=" `height`='".$height."'";
   }
   empty($height)?$temp=0:$col=1; // 
 
 if ($col == 1) { // условие если нет первого параметра
-
   empty($load_class)?$sql_load_class="":$sql_load_class=" AND `load_class`=$load_class";
   } else {
     empty($load_class)?$sql_load_class="":$sql_load_class=" `load_class`=$load_class";
   }
   empty($load_class)?$temp=0:$col=1; // 
 
+
+// if ($col == 1) { // условие если нет первого параметра
+//     empty($uklon)?$sql_uklon="":$sql_uklon=" AND `uklon`=$uklon";
+//     } else {
+//       empty($uklon)?$sql_uklon="":$sql_uklon=" `uklon`=$uklon";
+//     }
+//     empty($uklon)?$temp=0:$col=1; // 
   
-  empty($uklon)?$sql_uklon=0:$sql_uklon=1;
+    if ($col == 1) { // условие если нет первого параметра
+      ($uklon == 1)?$sql_uklon=" AND `uklon`=1":$sql_uklon=" AND `uklon`=0";
+      } else {
+      ($uklon == 1)?$sql_uklon=" `uklon`= 1":$sql_uklon=" `uklon`= 0";
+      }
+      ($uklon == 1)?$temp=0:$col=1; // 
+  //empty($uklon)?$sql_uklon=0:$sql_uklon=1;
         
     
   
 
 
-    $sql = "SELECT * FROM `line_drain_lotki` WHERE  $sql_maker $sql_typeProduct $sql_material $sql_dn $sql_width $sql_height $sql_load_class AND `uklon`=$sql_uklon";
-echo "==={".$sql."}===<br>";
+    $sql = "SELECT * FROM `line_drain_lotki` WHERE  $sql_maker $sql_typeProduct $sql_material $sql_dn $sql_width $sql_height $sql_load_class $sql_uklon";
+echo "=SQL_QUERY={".$sql."}=SQL_QUERY=<br>";
+
+
 // echo "COL=".$col;
   $fQuery = $mysqli->query($sql);
 //$arr_name = [];

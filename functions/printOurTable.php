@@ -49,8 +49,8 @@ if (isset($arr_name)) {
             <td class=\"\">".$arr_name[$i]['height']."</td>
             <td class=\"\">".$arr_name[$i]['load_class']."</td>
             <td class=\"\">".$arr_name[$i]['weight']."</td>
-            <td class =\"\">".$arr_name[$i]['price']."</td>
-            <td class =\"\">".$arr_name[$i]['discount']."</td>
+            <td class =\"price_real\">".$arr_name[$i]['price']."</td>
+            <td class =\"price_dealer\">".$arr_name[$i]['discount']."</td>
             <td>".$arr_name[$i]['date_write']."</td>
             <td>".$arr_name[$i]['option_article']."</td>
             <td>".$typeProduct_temp."</td>
