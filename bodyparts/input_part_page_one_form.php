@@ -2,15 +2,17 @@
 require_once("functions/select_params.php");
 
 
-
 if (!empty($_GET['maker']))       {  $maker = $_GET['maker'];  }
 if (!empty($_GET['typeProduct'])) {  $typeProduct = $_GET['typeProduct'];  }
 if (!empty($_GET['material']))    {  $material = $_GET['material'];  }
 if (!empty($_GET['dn']))          {  $dn = $_GET['dn'];  }
 if (!empty($_GET['width']))       {  $width = $_GET['width'];  }
+if (!empty($_GET['delta_width'])) {  $delta_width = $_GET['delta_width'];  }
 if (!empty($_GET['height']))      {  $height = $_GET['height'];  }
+if (!empty($_GET['delta_height'])){  $delta_height = $_GET['delta_height'];  }
 if (!empty($_GET['load_class']))  {  $load_class  = $_GET['load_class'];  }
 if (!empty($_GET['uklon']))       {  $uklon  = $_GET['uklon'];  }
+if (!empty($_GET['sort']))        {  $sort  = $_GET['sort'];  }
 
 $get_param=0; // количество передаваемых параметров в ГЕТ запросе
 !isset($maker)?$maker = "": $get_param++ ;
@@ -21,7 +23,9 @@ $get_param=0; // количество передаваемых параметр�
 !isset($height)?  $height = "" : $get_param++ ;
 !isset($load_class)? $load_class = "": $get_param++ ;
 !isset($uklon)? $uklon = "": $get_param++ ;
-
+!isset($delta_width)? $delta_width = "": $get_param++ ;
+!isset($delta_height)? $delta_height = "": $get_param++ ;
+!isset($sort)? $sort = "": $get_param++ ;
 
 
 // echo "maker=". $maker."<br>";
@@ -35,7 +39,7 @@ $get_param=0; // количество передаваемых параметр�
 
 
 // Создаем массив по всем параметрам, есЛи не выбран ни один параметр, то выводим все таблицу
-$get_param>0 ? $arr_for_upper_form = selectForCapWhereAll($mysqli, $maker, $typeProduct, $material,$dn , $width , $height , $load_class, $uklon):$arr_for_upper_form=selectAllArr($mysqli);
+$get_param>0 ? $arr_for_upper_form = selectForCapWhereAll($mysqli, $maker, $typeProduct, $material,$dn , $width , $height , $load_class, $uklon, $delta_width,$delta_height, $sort):$arr_for_upper_form=selectAllArr($mysqli);
 $i = "";
 foreach ($arr_for_upper_form as $arr) {
     $arr_maker[$i] = $arr['maker'];
@@ -139,14 +143,14 @@ echo <<<HTML
 HTML;
 // echo  " <option disabled >Гидр.сечение</option>";
 
-$dn_temp = dnName($dn);
+$dn_temp = selectDnFromPerem($dn);
 echo  " <option selected value=\"".$dn."\">".$dn_temp."</option>";
 
 echo  " <option value=\"\">сброс</option>";
 
                     foreach ($arr_dn as $arr_x) 
                       {
-                        $dn_temp = dnName($arr_x);  
+                        $dn_temp = selectDnFromPerem($arr_x);  
                         echo "<option value=".$arr_x.">".$dn_temp."</option>";
                       }
 echo <<<HTML
@@ -194,12 +198,41 @@ if ($width == "")  {echo  " <option value= \"\">Ширина</option>";}
     echo  " <option value=\"\">сброс</option>";
                     foreach ($arr_width  as $arr_w) 
                       {
-                          echo "<option width=".$arr_w.">".$arr_w."</option>";
+                          echo "<option value=".$arr_w.">".$arr_w."</option>";
                       }
 echo <<<HTML
        </select>
      </div>
 HTML;
+
+
+
+//   ДЕЛЬТА Ширины     ********************************************************************    
+
+echo <<<HTML
+            <div class="mobile_web">
+            <select size ="1" name="delta_width">
+HTML;
+   
+if ($delta_width <> "") {
+     echo " <option selected value=".$delta_width.">".$delta_width."</option>";
+      }
+     else {
+      echo  " <option selected disabled >/\W</option>";     
+     }
+      echo  " <option value=\"\">сброс</option>";
+   for ($i=1;$i <21;$i++) {
+           echo "<option value=".$i.">".$i."</option>";
+                      }
+echo <<<HTML
+       </select>
+           </div>
+HTML;
+
+
+
+
+
 
 //     ВЫСОТА     ********************************************************************    
 
@@ -216,7 +249,7 @@ if ($height == "")  {echo  " <option value= \"\">Высота</option>";}
     echo  " <option value=\"\">сброс</option>";
                     foreach ($arr_height as $arr_h) 
                       {
-                          echo "<option height=".$arr_h.">".$arr_h."</option>";
+                          echo "<option value=".$arr_h.">".$arr_h."</option>";
                       }
 echo <<<HTML
        </select>
@@ -224,9 +257,45 @@ echo <<<HTML
 HTML;
 
 
+//   ДЕЛЬТА ВЫСОТы     ********************************************************************    
+echo <<<HTML
+            <div class="mobile_web">
+            <select size ="1" name="delta_height">
+HTML;
+   
+if ($delta_height <> "") {
+     echo " <option selected value=".$delta_height.">".$delta_height."</option>";
+      }
+     else {
+      echo  " <option selected disabled >/\H</option>";     
+     }
+      echo  " <option value=\"\">сброс</option>";
+   for ($i=1;$i <21;$i++) {
+           echo "<option value=".$i.">".$i."</option>";
+                      }
+echo <<<HTML
+       </select>
+           </div>
+HTML;
+
+//   Сортировка     ********************************************************************    
+
+echo <<<HTML
+            <div class="mobile_web">
+            <select size ="1" name="sort">
+                <option  value selected="">Сортировка</option>
+                <option value="">сброс</option>
+                <option  value="width">Ширина</option>
+                <option  value="height">Высота</option>
+            </select>
+           </div>
+HTML;
 
 
 
+
+
+//////////////////////////////////////////////////////////////
 echo <<<HTML
 
              <button type="submit">ОБНОВИТЬ</button>

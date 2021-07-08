@@ -1,7 +1,7 @@
 <?php
 // $mysqli->query("SET NAMES 'utf8'");
 // ФУНКИЯ ВЫБОРА параметров для запроса в БД, Сделано по ебнуому, чтобы можно было выбирать в любом порядке параметры
-function selectForCapWhereAll($mysqli, $maker, $typeProduct, $material, $dn , $width , $height , $load_class, $uklon) {
+function selectForCapWhereAll($mysqli, $maker, $typeProduct, $material, $dn , $width , $height , $load_class, $uklon, $delta_width,$delta_height,$sort) {
  $temp=0; 
 $col=0; // вводим переменную, чтобы понять сколько параметров выбрано
 
@@ -35,15 +35,39 @@ if ($col == 1) { // условие если нет первого парамет
 
 if ($col == 1) { // условие если нет первого параметра
     empty($width)?$sql_width="":$sql_width=" AND `width`='".$width."'";
-  } else {
+        if (($sql_width<>"") and  ($delta_width<>"")) {
+          $delta_w1 = $width - $delta_width;
+          $delta_w2 = $width + $delta_width;
+          $sql_width=" AND `width`>".$delta_w1." AND `width`<".$delta_w2;
+          }
+     
+   
+     } else {
     empty($width)?$sql_width="":$sql_width=" `width`='".$width."'";
+    if (($sql_width<>"") and  ($delta_width<>"")) {
+      $delta_w1 = $width - $delta_width;
+      $delta_w2 = $width + $delta_width;
+      $sql_width=" `width`>".$delta_w1." AND `width`<".$delta_w2;
+      }
+
+
   }
   empty($width)?$temp=0:$col=1; // 
 
 if ($col == 1) { // условие если нет первого параметра
   empty($height)?$sql_height="":$sql_height=" AND `height`='".$height."'";
+  if (($height<>"") and  ($delta_height<>"")) {
+          $delta_h1 = $height - $delta_height;
+          $delta_h2 = $height + $delta_height;
+          $sql_height=" AND `height`>".$delta_h1." AND `height`<".$delta_h2;
+     }
   } else {
     empty($height)?$sql_height="":$sql_height=" `height`='".$height."'";
+    if (($height<>"") and  ($delta_height<>"")) {
+        $delta_h1 = $height - $delta_height;
+        $delta_h2 = $height + $delta_height;
+        $sql_height=" `height`>".$delta_h1." AND `height`<".$delta_h2;
+    }
   }
   empty($height)?$temp=0:$col=1; // 
 
@@ -70,11 +94,13 @@ if ($col == 1) { // условие если нет первого парамет
       ($uklon == 1)?$temp=0:$col=1; // 
   //empty($uklon)?$sql_uklon=0:$sql_uklon=1;
         
-    
-  
+    ////////////////// сортировка по высоте или ширине 
+    $sql_sort="";
+    if (($height<>"") or ($width<>"") or ($dn<>"") or ($typeProduct<>"")) {
+    empty($sort)?$sql_sort="":$sql_sort=" ORDER BY ".$sort." ASC";
+    }
+      $sql = "SELECT * FROM `line_drain_lotki` WHERE  $sql_maker $sql_typeProduct $sql_material $sql_dn $sql_width $sql_height $sql_load_class $sql_uklon $sql_sort";
 
-
-    $sql = "SELECT * FROM `line_drain_lotki` WHERE  $sql_maker $sql_typeProduct $sql_material $sql_dn $sql_width $sql_height $sql_load_class $sql_uklon";
 echo "=SQL_QUERY={".$sql."}=SQL_QUERY=<br>";
 
 

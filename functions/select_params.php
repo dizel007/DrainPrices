@@ -14,29 +14,30 @@ return $makerName;
 // функция выбираем название продукта из списка
 function selectTypeProductFromPerem($typeProduct) {
   switch ($typeProduct) {
-    case 0: {$typeRoductName = "Тип продукции"; break;}
-    case 1: {$typeRoductName = "Лоток"; break;}
-    case 2: {$typeRoductName = "Пескоуловитель"; break;}
-    case 3: {$typeRoductName = "Решетка"; break;}
-    case 4: {$typeRoductName = "Крепеж"; break;}
-    case 5: {$typeRoductName = "Дождеприемник"; break;}
-    case 6: {$typeRoductName = "люк"; break;}
-    case 7: {$typeRoductName = "Торцевая заглушка"; break;}
-    case 8: {$typeRoductName = "Переходник"; break;}
-    case 9: {$typeRoductName = "Корзина"; break;}
+    case 0: {$typeProductName = "Тип продукции"; break;}
+    case 1: {$typeProductName = "Лоток"; break;}
+    case 2: {$typeProductName = "Пескоуловитель"; break;}
+    case 3: {$typeProductName = "Решетка"; break;}
+    case 4: {$typeProductName = "Крепеж"; break;}
+    case 5: {$typeProductName = "Дождеприемник"; break;}
+    case 6: {$typeProductName = "люк"; break;}
+    case 7: {$typeProductName = "Торцевая заглушка"; break;}
+    case 8: {$typeProductName = "Переходник"; break;}
+    case 9: {$typeProductName = "Корзина"; break;}
     
      
     break;
 }
-return $typeRoductName;
+return $typeProductName;
 }
 
 // функция выбираем название продукта из списка
 function selectDnFromPerem($dn) {
   switch ($dn) {
-    case 0: {$dnName = "Гидр.Сечен"; break;}
+    case 0: {$dnName = "DN"; break;}
     case 90: {$dnName = "DN90"; break;}
     case 100: {$dnName = "DN100"; break;}
+    case 110: {$dnName = "DN110"; break;}
     case 150: {$dnName = "DN150"; break;}
     case 160: {$dnName = "DN160"; break;}
     case 200: {$dnName = "DN200"; break;}
