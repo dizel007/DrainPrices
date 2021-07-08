@@ -7,24 +7,23 @@ function printOurTable($arr_name) {
       echo "<div class =\"our_table\"> <table class=\"drawtable\">";
       $i=0;
       echo"<tr>
-      <td class=\"hidden_class_column\">id</td>
-      <td>Производитель</td>
-      <td>Артикул</td>
-      <td class=\"hidden_class_column\">Наименование</td>
-      <td>Гидр.сечение</td>
-      <td class=\"hidden_class_column\">Длина</td>
-      <td class=\"hidden_class_column\">Ширина</td>
-      <td class=\"hidden_class_column\">Высота</td>
-          <td class=\"hidden_class_column\">Кл.Нагр</td>
-      <td class=\"hidden_class_column\">Вес</td>
-          <td  class=\"hidden_class_column\">Цена розн.</td>
-      <td>Цена дилер</td>
-      <td>Дата обновл</td>
-      <td>Доп. артикулы</td>
-      <td>Тип Продукта</td>
-      <td>Материал</td>
- 
-      </tr>";
+              <td class=>id</td>
+              <td>Производитель</td>
+              <td>Артикул</td>
+              <td>Наименование</td>
+              <td>Гидр.сечение</td>
+              <td>Длина</td>
+              <td>Ширина</td>
+              <td>Высота</td>
+              <td>Кл.Нагр</td>
+              <td>Вес</td>
+              <td>Цена розн.</td>
+              <td>Цена дилер</td>
+              <td>Дата обновл</td>
+              <td>Доп. артикулы</td>
+              <td>Тип Продукта</td>
+              <td>Материал</td>
+           </tr>";
 
       
       $realDate = date("m.d.y");
@@ -46,17 +45,17 @@ if (isset($arr_name)) {
           $dnName = selectDnFromPerem($arr_name[$i]['DN']);
 
 
-           echo "<tr class =\"\">
-            <td class=\"\">".($i+1)."</td>
+           echo "<tr>
+            <td>".($i+1)."</td>
             <td>".$maker_temp."</td> 
             <td>".$arr_name[$i]['article']."</td>
             <td class=\"limit_width \">".$arr_name[$i]['name']."</td>
             <td>".$dnName."</td>
-            <td class=\"\">".$arr_name[$i]['length']."</td>  
-            <td class=\"\">".$arr_name[$i]['width']."</td>
-            <td class=\"\">".$arr_name[$i]['height']."</td>
-            <td class=\"\">".$arr_name[$i]['load_class']."</td>
-            <td class=\"\">".$arr_name[$i]['weight']."</td>
+            <td>".$arr_name[$i]['length']."</td>  
+            <td>".$arr_name[$i]['width']."</td>
+            <td>".$arr_name[$i]['height']."</td>
+            <td>".$arr_name[$i]['load_class']."</td>
+            <td>".$arr_name[$i]['weight']."</td>
             <td class =\"price_real\">".$arr_name[$i]['price']."</td>
             <td class =\"price_dealer\">".$arr_name[$i]['discount']."</td>
             <td>".$arr_name[$i]['date_write']."</td>
@@ -72,5 +71,3 @@ if (isset($arr_name)) {
 
   return 1;
 }
-
-?>

@@ -144,15 +144,14 @@ HTML;
 // echo  " <option disabled >Гидр.сечение</option>";
 
 $dn_temp = selectDnFromPerem($dn);
-echo  " <option selected value=\"".$dn."\">".$dn_temp."</option>";
+echo  " <option selected value=\"" . $dn . "\">" . $dn_temp . "</option>";
 
 echo  " <option value=\"\">сброс</option>";
 
-                    foreach ($arr_dn as $arr_x) 
-                      {
-                        $dn_temp = selectDnFromPerem($arr_x);  
-                        echo "<option value=".$arr_x.">".$dn_temp."</option>";
-                      }
+foreach ($arr_dn as $arr_x) {
+  $dn_temp = selectDnFromPerem($arr_x);
+  echo "<option value=" . $arr_x . ">" . $dn_temp . "</option>";
+}
 echo <<<HTML
        </select>
            </div>
@@ -161,27 +160,21 @@ HTML;
 
 //  ТИП МАТЕРИАЛА ****************************************************************
 
-
 echo <<<HTML
-            <div class="mobile_web">
-            <select size ="1" name="material">
+    <div class="mobile_web">
+       <select size ="1" name="material">
 HTML;
-// echo  " <option disabled >Материал</option>";
-
 $material_temp = selectMaterialFromPerem($material);
-
 echo  " <option selected value=\"".$material."\">".$material_temp."</option>";
-
 echo  " <option value=\"\">сброс</option>";
-
-                    foreach ($arr_material as $arr_x) 
-                      {
-                        $material_temp = selectMaterialFromPerem($arr_x);
-                          echo "<option value=".$arr_x.">".$material_temp."</option>";
-                      }
+       foreach ($arr_material as $arr_x) 
+          {
+            $material_temp = selectMaterialFromPerem($arr_x);
+            echo "<option value=".$arr_x.">".$material_temp."</option>";
+          }
 echo <<<HTML
        </select>
-           </div>
+    </div>
 HTML;
 
 
@@ -228,9 +221,6 @@ echo <<<HTML
        </select>
            </div>
 HTML;
-
-
-
 
 
 
@@ -290,11 +280,6 @@ echo <<<HTML
             </select>
            </div>
 HTML;
-
-
-
-
-
 //////////////////////////////////////////////////////////////
 echo <<<HTML
 
@@ -327,8 +312,3 @@ unset($arr_height);
 unset($arr_hload_class);
 
 // unset($arr_for_upper_form);
-
-
-
-
-?>

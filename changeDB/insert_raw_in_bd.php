@@ -27,10 +27,6 @@ $article = substr($article, 1, -1); // Костыль чтобы вводить 
 $maker = $arr[1]; // производитель товара
 $maker = substr($maker, 1, -1); // Костыль чтобы вводить UTF-8 
 
-
-// echo "<br> ooooooooooo--".$maker."--hhhhhhhhhhhhhh<br>";
-
-
 $tempArr = findProductFromDb($article, $maker); // доставем из БД массив с данным артикулом
 
 // echo "<pre>";
@@ -67,10 +63,8 @@ if (($tempArr[0]['article'] == $article) and ($tempArr[0]['maker'] == $maker)) {
    // Если артикул отсутствует, то вводим новую строку
       echo "<br>Добавляем новый товар<br>";       
       $sql = "INSERT INTO `line_drain_lotki` (`id`, `maker`, `article`, `name`, `DN`, `length`, `width`, `height`, `load_class`, `weight`, `price`, `discount`, `date_write`, `option_article`, `typeProduct`, `material` , `uklon`) VALUES $buffer";
-
        echo "<--".$sql."--><br>";
-    
-       $query = $mysqli->query($sql);
+        $query = $mysqli->query($sql);
             if (!$query){
               echo "WE ARE DIE";
             die();
@@ -80,10 +74,6 @@ if (($tempArr[0]['article'] == $article) and ($tempArr[0]['maker'] == $maker)) {
               echo "Товар добавлен <br>";
             }
      }
-
-
-
-      
     }
 }
 fclose($handle);
@@ -122,5 +112,3 @@ function findProductFromDb ($article, $maker) {
 
 
   echo "END. <br>";
-  
-?>

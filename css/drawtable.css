@@ -1,12 +1,13 @@
 .up_form {
-/* display: block; */
-display: flex;
-width: 100%;
-background-color: rgb(172, 159, 219);
-min-height: 30px;
-margin: 0;
+  /* display: block; */
+  display: flex;
+  width: 100%;
+  background-color: rgb(172, 159, 219);
+  min-height: 30px;
+  margin: 0;
 
 }
+
 .mobile_web {
   margin: 5px;
 }
@@ -15,51 +16,57 @@ margin: 0;
 .drawtable {
   /* max-width: 99%; */
   font-size: 12px;
-  word-wrap : break-word;
-  }
-
- .drawtable td{
- background-color: rgb(229, 206, 236);
- border:  0.5px solid ;
- word-wrap : break-word;
- text-align: center;
-  
+  word-wrap: break-word;
 }
+
+.drawtable td {
+  background-color: rgb(229, 206, 236);
+  border: 0.5px solid;
+  word-wrap: break-word;
+  text-align: center;
+
+}
+
 .alarmcolor {
   color: red;
   font-weight: 900;
 }
+
 .limit_width {
-  
+
   max-width: 850px;
 }
+
 .our_table {
-  overflow-x:visible;
-   
+  overflow-x: visible;
+
 }
 
 
 
 .RedColor {
-  color:indigo;
+  color: indigo;
   font-weight: 700;
-  
+
 }
+
 .GreenColor {
-  color:firebrick;
+  color: firebrick;
   font-weight: 900;
-  
+
 }
+
 .BlinkColor {
- 
-  color:darkgray
+
+  color: darkgray
 }
 
 .price_real {
-  color:firebrick;
-  font-weight: 900; 
+  color: firebrick;
+  font-weight: 900;
 }
+
 .price_dealer {
-  color:rgb(34, 178, 65);
-  font-weight: 900; 
+  color: rgb(34, 178, 65);
+  font-weight: 900;
 }
